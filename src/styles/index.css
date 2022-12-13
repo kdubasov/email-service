@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    transition: .1s;
+}
+
+*root{
+    /*dark theme*/
+    --bg-dark: #313131;
+
+    /*light theme*/
+    --bg-light: #efefef;
+}

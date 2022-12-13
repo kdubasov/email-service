@@ -1,0 +1,12 @@
+.Layout{
+    width: 100%;
+    height: 100vh;
+}
+.Layout.light{
+    color: var(--bs-dark);
+    background: var(--bs-white);
+}
+.Layout.dark{
+    color: var(--bs-white);
+    background: var(--bs-dark);
+}
