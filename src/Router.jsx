@@ -6,13 +6,18 @@ import RegisterPage from "./pages/Auth/RegisterPage.jsx";
 import UserProfilePage from "./pages/Auth/UserProfilePage.jsx";
 import NavbarTop from "./general-components/NavbarTop/NavbarTop.jsx";
 import {Container} from "react-bootstrap";
+import MessageAlert from "./general-components/MessageAlert/MessageAlert.jsx";
 
 const Router = () => {
 
     return (
         <div>
 
+            {/*navbar*/}
             <NavbarTop />
+
+            {/*alert for all components with redux slice*/}
+            <MessageAlert />
 
             <Container className={"py-3"}>
                 <Routes>

@@ -4,8 +4,11 @@ import {useNavigate} from "react-router-dom";
 import {useUserAuth} from "../../providers/AuthProvider.jsx";
 import {authDB} from "../../database/connect.js";
 import { sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
+import {useDispatch} from "react-redux";
 const UserProfilePage = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {user,logOut} = useUserAuth();
     // console.log(user,"USER");
@@ -18,16 +21,43 @@ const UserProfilePage = () => {
     //подтвержаем емаил через почту
     const handleVerifyEmail = () => {
         sendEmailVerification(authDB.currentUser)
-            .then(() => {
-                console.log("Email verification sent!")
-            });
+            .then(() => dispatch(setAlert({//alert show
+                show:true,
+                variant:"success",
+                text:"Email verification sent!",
+            })))
+            .catch(error => dispatch(setAlert({//alert show
+                show:true,
+                variant:"danger",
+                text:error.message,
+            })))
+
+        setTimeout(() => dispatch(setAlert({//alert hide
+            show:false,
+            variant:"",
+            text:"",
+        })),5000)
     }
 
     //поменять пароль
     const handleChangePassword = () => {
         sendPasswordResetEmail(authDB, user.email)
-            .then(() => {console.log("Password reset email sent!")})
-            .catch(() => {console.log("Password reset email sent ERROR!")})
+            .then(() => dispatch(setAlert({//alert show
+                show:true,
+                variant:"success",
+                text:"Password reset email sent!",
+            })))
+            .catch(error => dispatch(setAlert({//alert show
+                show:true,
+                variant:"danger",
+                text:error.message,
+            })))
+
+        setTimeout(() => dispatch(setAlert({//alert hide
+            show:false,
+            variant:"",
+            text:"",
+        })),5000)
     }
 
     return (

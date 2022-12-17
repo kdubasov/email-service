@@ -3,10 +3,13 @@ import {Link, useNavigate} from "react-router-dom";
 import {createUserWithEmailAndPassword,updateProfile} from "firebase/auth";
 import {Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
+import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
+import {useDispatch} from "react-redux";
 
 
 const RegisterPage = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [formData,setFormData] = useState({
@@ -28,7 +31,16 @@ const RegisterPage = () => {
 
         //проверяем совпадение паролей
         if (formData.password !== formData.passwordAgain){
-            console.log("Пароли не совпадают");
+            dispatch(setAlert({//alert show
+                show:true,
+                variant:"danger",
+                text:"Invalid passwords! Enter it again!"
+            }))
+            setTimeout(() => dispatch(setAlert({//alert hide
+                show:false,
+                variant:"",
+                text:"",
+            })),5000)
             return;
         }
 
@@ -42,7 +54,17 @@ const RegisterPage = () => {
                 console.log(user);
                 navigate("/userProfile")
             })
-            .catch(console.error)
+            .catch(error => dispatch(setAlert({//alert show
+                show:true,
+                variant:"danger",
+                text:error.message,
+            })))
+
+        setTimeout(() => dispatch(setAlert({//alert hide
+            show:false,
+            variant:"",
+            text:"",
+        })),5000)
     }
 
     return (

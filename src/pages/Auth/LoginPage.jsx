@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import { signInWithEmailAndPassword,setPersistence,browserSessionPersistence } from "firebase/auth";
 import {Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
+import {useDispatch} from "react-redux";
+import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
 
 const LoginPage = () => {
 
@@ -10,13 +12,24 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
         setPersistence(authDB, browserSessionPersistence)
             .then(() => {return signInWithEmailAndPassword(authDB,email,password)})
             .then(() => {navigate("/userProfile")})
-            .catch(console.error)
+            .catch(error => dispatch(setAlert({//alert show
+                show:true,
+                variant:"danger",
+                text:error.message,
+            })))
+
+        setTimeout(() => dispatch(setAlert({//alert hide
+            show:false,
+            variant:"",
+            text:"",
+        })),5000)
     }
 
     return (

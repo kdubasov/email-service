@@ -1,0 +1,7 @@
+.MessageAlert{
+    padding: .5em 2em !important;
+    font-weight: 700;
+    position: fixed !important;
+    bottom:0;
+    left: 15px;
+}
