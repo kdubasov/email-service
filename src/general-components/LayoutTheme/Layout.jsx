@@ -1,8 +1,8 @@
 import React from 'react';
+import useTheme from "../../hooks/useTheme.js";
 
 //css
 import "./Layout.css";
-import useTheme from "../../hooks/useTheme.jsx";
 
 const Layout = ({children}) => {
 
