@@ -34,7 +34,7 @@ const LoginPage = () => {
         <div className={"LoginPage"}>
             <h3>LoginPage</h3>
 
-            <Form onSubmit={handleLogin}>
+            <Form className={"w-50 p-2 border"} onSubmit={handleLogin}>
                 <FormControl
                     placeholder={"Enter your email address"}
                     type={"email"}

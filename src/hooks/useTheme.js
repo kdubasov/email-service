@@ -3,9 +3,7 @@ import {ThemeContext} from "../providers/ThemeProvider.jsx";
 
 const UseTheme = () => {
     //получаем тему из контекста
-    const value = useContext(ThemeContext);
-
-    return value;
+    return useContext(ThemeContext);
 };
 
 export default UseTheme;

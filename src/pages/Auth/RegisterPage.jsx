@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {createUserWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword,updateProfile,sendEmailVerification} from "firebase/auth";
 import {Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
 import {useDispatch} from "react-redux";
@@ -14,6 +14,8 @@ const RegisterPage = () => {
 
     const [formData,setFormData] = useState({
         email:"",
+        displayName:"Kirill Dubasov",
+        phoneNumber:"+79040574145",
         password:"",
         passwordAgain:"",
     })
@@ -36,6 +38,14 @@ const RegisterPage = () => {
 
         createUserWithEmailAndPassword(authDB,formData.email,formData.password)
             .then(({user}) => {
+                //записываем имя и фамилию и фотку пользователя
+                updateProfile(authDB.currentUser, {
+                    displayName: formData.displayName,
+                    photoURL: "/devs/user-circle.svg",
+                }).then(() => {console.log("User data added!")})
+                //отправляем подтверждение на почту
+                sendEmailVerification(authDB.currentUser)
+                    .then(() => {console.log("Email verification sent!")});
                 console.log(user);
                 //записваем юзера в стор
                 dispatch(setUser({
@@ -52,7 +62,7 @@ const RegisterPage = () => {
         <div className={"RegisterPage"}>
             <h3>Sign In</h3>
 
-            <Form onSubmit={handleRegister}>
+            <Form className={"w-50 p-2 border"} onSubmit={handleRegister}>
                 <FormControl
                     type={"email"}
                     placeholder={"Email"}
