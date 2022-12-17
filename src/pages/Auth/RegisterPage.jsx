@@ -1,21 +1,17 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {createUserWithEmailAndPassword,updateProfile,sendEmailVerification} from "firebase/auth";
+import {createUserWithEmailAndPassword,updateProfile} from "firebase/auth";
 import {Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
-import {useDispatch} from "react-redux";
-import {setUser} from "../../redux-store/slices/userSlice.js";
 
 
 const RegisterPage = () => {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [formData,setFormData] = useState({
         email:"",
-        displayName:"Kirill Dubasov",
-        phoneNumber:"+79040574145",
+        displayName:"",
         password:"",
         passwordAgain:"",
     })
@@ -43,16 +39,7 @@ const RegisterPage = () => {
                     displayName: formData.displayName,
                     photoURL: "/devs/user-circle.svg",
                 }).then(() => {console.log("User data added!")})
-                //отправляем подтверждение на почту
-                sendEmailVerification(authDB.currentUser)
-                    .then(() => {console.log("Email verification sent!")});
                 console.log(user);
-                //записваем юзера в стор
-                dispatch(setUser({
-                    email: user.email,
-                    id:user.uid,
-                    token:user["accessToken"],
-                }))
                 navigate("/userProfile")
             })
             .catch(console.error)
@@ -68,6 +55,13 @@ const RegisterPage = () => {
                     placeholder={"Email"}
                     value={formData.email}
                     onChange={e => handleSetFormData(e.target.value,"email")}
+                />
+                <FormControl
+                    required
+                    type={"text"}
+                    placeholder={"Name and Surname"}
+                    value={formData.displayName}
+                    onChange={e => handleSetFormData(e.target.value,"displayName")}
                 />
 
                 <FormControl

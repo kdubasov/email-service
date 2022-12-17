@@ -4,23 +4,22 @@ import Router from "./Router.jsx";
 import {BrowserRouter} from "react-router-dom";
 import {ThemeProvider} from "./providers/ThemeProvider.jsx";
 import Layout from "./general-components/LayoutTheme/Layout.jsx";
-import {Provider} from "react-redux";
-import {store} from "./redux-store/store.js";
 
 //css
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/index.css";
+import {UserAuthContextProvider} from "./providers/AuthProvider";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <ThemeProvider>
-        <Layout>
-            <BrowserRouter>
-                <Provider store={store}>
-                    <Router />
-                </Provider>
-            </BrowserRouter>
-        </Layout>
-      </ThemeProvider>
+      <UserAuthContextProvider>
+          <ThemeProvider>
+              <Layout>
+                  <BrowserRouter>
+                      <Router />
+                  </BrowserRouter>
+              </Layout>
+          </ThemeProvider>
+      </UserAuthContextProvider>
   </React.StrictMode>,
 )

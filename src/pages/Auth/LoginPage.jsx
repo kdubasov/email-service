@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,setPersistence,browserSessionPersistence } from "firebase/auth";
 import {Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
-import {setUser} from "../../redux-store/slices/userSlice.js";
 
 const LoginPage = () => {
 
@@ -12,21 +10,12 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(authDB,email,password)
-            .then(({user}) => {
-                console.log(user);
-                //записваем юзера в стор
-                dispatch(setUser({
-                    email: user.email,
-                    id:user.uid,
-                    token:user["accessToken"],
-                }))
-                navigate("/userProfile")
-            })
+        setPersistence(authDB, browserSessionPersistence)
+            .then(() => {return signInWithEmailAndPassword(authDB,email,password)})
+            .then(() => {navigate("/userProfile")})
             .catch(console.error)
     }
 
