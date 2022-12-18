@@ -1,0 +1,21 @@
+.SendMessage{
+    width: 400px;
+    margin: 1em 0;
+    padding: 2em 1em;
+    border: 1px solid #555;
+    border-radius: .25em;
+}
+.SendMessage input,
+.SendMessage input:focus,
+.SendMessage textarea,
+.SendMessage textarea:focus{
+    margin: .25em 0;
+    border: 1px solid #555;
+    background: none;
+    color: var(--bs-white);
+    resize: none;
+}
+.SendMessage label{
+    font-weight: 600;
+    padding-left: .5em;
+}
