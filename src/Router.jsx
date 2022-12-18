@@ -7,11 +7,17 @@ import UserProfilePage from "./pages/Auth/UserProfilePage.jsx";
 import NavbarTop from "./general-components/NavbarTop/NavbarTop.jsx";
 import {Container} from "react-bootstrap";
 import MessageAlert from "./general-components/MessageAlert/MessageAlert.jsx";
+import ResetPasswordPage from "./pages/Auth/ResetPasswordPage.jsx";
+import CheckVerifyEmail from "./general-components/CheckVerifyEmail.jsx";
+import AuthCheckRoute from "./pages/Auth/AuthCheckRoute.jsx";
 
 const Router = () => {
 
     return (
         <div>
+
+            {/*verify email message*/}
+            <CheckVerifyEmail />
 
             {/*navbar*/}
             <NavbarTop />
@@ -24,7 +30,15 @@ const Router = () => {
                     <Route path={"/"} element={<MainPage />} />
                     <Route path={"/login"} element={<LoginPage />} />
                     <Route path={"/signIn"} element={<RegisterPage />} />
-                    <Route path={"/userProfile"} element={<UserProfilePage />} />
+                    <Route path={"/resetPassword"} element={<ResetPasswordPage />} />
+                    <Route
+                        path={"/userProfile"}
+                        element={
+                            <AuthCheckRoute>
+                                <UserProfilePage />
+                            </AuthCheckRoute>
+                        }
+                    />
                 </Routes>
             </Container>
         </div>

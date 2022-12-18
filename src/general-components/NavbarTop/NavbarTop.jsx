@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Form, Nav, Navbar} from "react-bootstrap";
 import useTheme from "../../hooks/useTheme.js";
 import {Link} from "react-router-dom";
-import {useUserAuth} from "../../providers/AuthProvider.jsx";
+import {useUserAuth} from "../../context-providers/AuthProvider.jsx";
 
 const NavbarTop = () => {
 
@@ -13,7 +13,10 @@ const NavbarTop = () => {
     return (
         <Navbar bg={type} variant={type}>
             <Container>
-                <Navbar.Brand href="#home">Email Service</Navbar.Brand>
+                <Link to={"/"}>
+                    <Navbar.Brand>Email Service</Navbar.Brand>
+                </Link>
+
                 <Nav className="me-auto">
                     {/*переключатель темы*/}
                     {

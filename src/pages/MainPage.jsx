@@ -1,9 +1,10 @@
 import React from 'react';
+import {Badge} from "react-bootstrap";
 
 const MainPage = () => {
     return (
         <div className={"MainPage"}>
-            <h1>Main Page</h1>
+            <h3><Badge>Main page</Badge></h3>
         </div>
     )
 };

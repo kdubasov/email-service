@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import { signInWithEmailAndPassword,setPersistence,browserSessionPersistence } from "firebase/auth";
-import {Button, Form, FormControl} from "react-bootstrap";
+import { signInWithEmailAndPassword,setPersistence,browserLocalPersistence } from "firebase/auth";
+import {Badge, Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
 import {useDispatch} from "react-redux";
 import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
@@ -16,7 +16,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
-        setPersistence(authDB, browserSessionPersistence)
+        setPersistence(authDB, browserLocalPersistence)
             .then(() => {return signInWithEmailAndPassword(authDB,email,password)})
             .then(() => {navigate("/userProfile")})
             .catch(error => dispatch(setAlert({//alert show
@@ -34,7 +34,7 @@ const LoginPage = () => {
 
     return (
         <div className={"LoginPage"}>
-            <h3>LoginPage</h3>
+            <h3><Badge>Login</Badge></h3>
 
             <Form className={"w-50 p-2 border"} onSubmit={handleLogin}>
                 <FormControl
@@ -53,6 +53,7 @@ const LoginPage = () => {
             </Form>
 
             <p>Or <Link to={"/signIn"}>Sign In</Link></p>
+            <p>Or <Link to={"/resetPassword"}>Reset password</Link></p>
         </div>
     );
 };

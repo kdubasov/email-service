@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {createUserWithEmailAndPassword,updateProfile} from "firebase/auth";
-import {Button, Form, FormControl} from "react-bootstrap";
+import {Badge, Button, Form, FormControl} from "react-bootstrap";
 import {authDB} from "../../database/connect.js";
 import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
 import {useDispatch} from "react-redux";
@@ -31,6 +31,8 @@ const RegisterPage = () => {
 
         //проверяем совпадение паролей
         if (formData.password !== formData.passwordAgain){
+            handleSetFormData("","password");
+            handleSetFormData("","passwordAgain");
             dispatch(setAlert({//alert show
                 show:true,
                 variant:"danger",
@@ -69,7 +71,7 @@ const RegisterPage = () => {
 
     return (
         <div className={"RegisterPage"}>
-            <h3>Sign In</h3>
+            <h3><Badge>Sign In</Badge></h3>
 
             <Form className={"w-50 p-2 border"} onSubmit={handleRegister}>
                 <FormControl
@@ -103,6 +105,7 @@ const RegisterPage = () => {
             </Form>
 
             <p>Or <Link to={"/login"}>Log In</Link></p>
+            <p>Or <Link to={"/resetPassword"}>Reset password</Link></p>
         </div>
     );
 };

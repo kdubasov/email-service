@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Router from "./Router.jsx";
 import {BrowserRouter} from "react-router-dom";
-import {ThemeProvider} from "./providers/ThemeProvider.jsx";
+import {ThemeProvider} from "./context-providers/ThemeProvider.jsx";
 import Layout from "./general-components/LayoutTheme/Layout.jsx";
-import {UserAuthContextProvider} from "./providers/AuthProvider";
+import {UserAuthContextProvider} from "./context-providers/AuthProvider";
 import {store} from "./redux-store/store.js";
 import {Provider} from "react-redux";
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Badge, Button, ListGroup, ListGroupItem} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {useUserAuth} from "../../providers/AuthProvider.jsx";
+import {useUserAuth} from "../../context-providers/AuthProvider.jsx";
 import {authDB} from "../../database/connect.js";
 import { sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
@@ -63,7 +63,7 @@ const UserProfilePage = () => {
     return (
         <div className={"UserProfilePage"}>
 
-            <h2>User profile</h2>
+            <h3><Badge>User profile</Badge></h3>
 
             <ListGroup>
                 <ListGroupItem className={"d-flex justify-content-between align-items-center"}>
