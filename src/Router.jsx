@@ -10,6 +10,8 @@ import MessageAlert from "./general-components/MessageAlert/MessageAlert.jsx";
 import ResetPasswordPage from "./pages/Auth/ResetPasswordPage.jsx";
 import CheckVerifyEmail from "./general-components/CheckVerifyEmail.jsx";
 import AuthCheckRoute from "./pages/Auth/AuthCheckRoute.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 const Router = () => {
 
@@ -22,7 +24,7 @@ const Router = () => {
             {/*navbar*/}
             <NavbarTop />
 
-            {/*alert for all components with redux slice*/}
+            {/*alert for all pages-components with redux slice*/}
             <MessageAlert />
 
             <Container className={"py-3"}>
@@ -39,6 +41,15 @@ const Router = () => {
                             </AuthCheckRoute>
                         }
                     />
+                    <Route
+                        path={"/admin"}
+                        element={
+                            <AuthCheckRoute>
+                                <AdminPage />
+                            </AuthCheckRoute>
+                        }
+                    />
+                    <Route path={"*"} element={<NotFoundPage />} />
                 </Routes>
             </Container>
         </div>
