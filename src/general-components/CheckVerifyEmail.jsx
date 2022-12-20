@@ -17,6 +17,7 @@ const CheckVerifyEmail = () => {
             return (
                 <Alert variant={"danger"} className={"small m-0 p-2 text-center"}>
                     Your email is not verified, you cannot send messages until you confirm your email.
+                    Also other users can not see your profile and send you messages.
                 </Alert>
             );
         }

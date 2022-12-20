@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Badge, Button, FormControl} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {sendPasswordResetEmail} from "firebase/auth";
-import {authDB} from "../../database/connect.js";
+import {authDB} from "../../database/firebase-connect.js";
 import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
 import {useDispatch} from "react-redux";
 

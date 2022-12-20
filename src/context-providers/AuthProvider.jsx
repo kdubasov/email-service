@@ -3,7 +3,7 @@ import {
     onAuthStateChanged,
     signOut,
 } from "firebase/auth";
-import {authDB} from "../database/connect.js";
+import {authDB} from "../database/firebase-connect.js";
 
 const userAuthContext = createContext(null);
 
