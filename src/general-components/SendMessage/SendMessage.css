@@ -19,3 +19,12 @@
     font-weight: 600;
     padding-left: .5em;
 }
+
+.SendMessage .input-container{
+    position: relative;
+}
+.SendMessage .input-container img{
+    position: absolute;
+    right: 5px;
+    top: 60%;
+}

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Form, FormControl} from "react-bootstrap";
 import "./SendMessage.css";
+import {useGetUserFromEmail} from "../../pages-functions/SendMessage/useGetUserFromEmail.js";
 
 const SendMessage = () => {
 
@@ -10,6 +11,7 @@ const SendMessage = () => {
         subject:"",
         text:"",
     })
+    console.log(formData);
     //change form data
     const handleChange = (value,state) => {
         const copy = Object.assign({},formData);
@@ -17,17 +19,26 @@ const SendMessage = () => {
         setFormData(copy);
     }
 
-    console.log(formData)
+    //data about email from realtime database
+    const dataRecipient = useGetUserFromEmail(formData.recipient);
+    console.log(dataRecipient);
 
     return (
         <Form className={"SendMessage"}>
-            <label className={"small"}>Message recipient</label>
-            <FormControl
-                type={"email"}
-                size={"sm"}
-                value={formData.recipient}
-                onChange={e => handleChange(e.target.value,"recipient")}
-            />
+            <div className={"input-container"}>
+                <label className={"small"}>Message recipient</label>
+                <FormControl
+                    required
+                    type={"email"}
+                    size={"sm"}
+                    value={formData.recipient}
+                    onChange={e => handleChange(e.target.value,"recipient")}
+                />
+                {//success image when we have user with this email
+                    dataRecipient.email &&
+                    <img src={"/icons/success.svg"} alt={"user find"} />
+                }
+            </div>
 
             <label className={"small"}>Message subject</label>
             <FormControl
@@ -38,6 +49,7 @@ const SendMessage = () => {
 
             <label className={"small"}>Message text</label>
             <FormControl
+                required
                 as={"textarea"}
                 size={"sm"}
                 rows={5}
