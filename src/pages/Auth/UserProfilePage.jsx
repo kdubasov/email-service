@@ -7,6 +7,7 @@ import { sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
 import {useDispatch} from "react-redux";
 import {handleAddUserData} from "../../pages-functions/Auth/addUserData.js";
+import RedactUserData from "./RedactUserData.jsx";
 const UserProfilePage = () => {
 
     const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const UserProfilePage = () => {
 
             <ListGroup>
                 <ListGroupItem className={"d-flex justify-content-between align-items-center"}>
-                    <img src={user.photoURL} alt={user.displayName}/>
+                    <img width={150} src={user.photoURL} alt={user.displayName}/>
 
                     <Button
                         size={"sm"}
@@ -97,6 +98,11 @@ const UserProfilePage = () => {
                     }
                 </ListGroupItem>
             </ListGroup>
+
+            {
+                Boolean(Object.values(user).length) &&
+                <RedactUserData user={user} />
+            }
 
         </div>
     );
