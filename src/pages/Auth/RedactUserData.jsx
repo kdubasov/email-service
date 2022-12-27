@@ -18,7 +18,7 @@ const RedactUserData = ({user}) => {
         e.preventDefault();
         updateProfile(authDB.currentUser, {
             displayName: userState.displayName,
-            photoURL: newImage,
+            photoURL: newImage ? newImage : userState.photoURL,
         })
             .then(() => dispatch(setAlert({//alert show
                 show:true,
