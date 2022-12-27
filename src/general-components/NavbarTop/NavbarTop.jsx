@@ -3,6 +3,7 @@ import {Container, Form, Nav, Navbar} from "react-bootstrap";
 import useTheme from "../../hooks/useTheme.js";
 import {Link} from "react-router-dom";
 import {useUserAuth} from "../../context-providers/AuthProvider.jsx";
+import "./NavbarTop.css";
 
 const NavbarTop = () => {
 
@@ -11,23 +12,26 @@ const NavbarTop = () => {
     const {user} = useUserAuth();
 
     return (
-        <Navbar bg={type} variant={type}>
+        <Navbar bg={type} variant={type} className={"NavbarTop"}>
             <Container>
                 <Link to={"/"}>
                     <Navbar.Brand>Email Service</Navbar.Brand>
                 </Link>
 
                 <Nav className="me-auto">
-                    {/*переключатель темы*/}
-                    {
-                        user ?
-                            <Link to={"/userProfile"} style={{marginRight:".8em",color:"inherit"}}>
-                                User profile
-                            </Link>:
-                            <Link to={"/login"} style={{marginRight:".8em",color:"inherit"}}>
-                                Log In
-                            </Link>
+                    {//for auth user
+                        user &&
+                        <>
+                            <Link to={"/userProfile"}>Account</Link>
+                            <Link to={"/messages"}>Messages</Link>
+                        </>
                     }
+                    {//without auth
+                        !user &&
+                            <Link to={"/login"}>Log In</Link>
+                    }
+
+                    {/*переключатель темы*/}
                     <Form.Check
                         type="switch"
                         label="Switch theme"

@@ -12,6 +12,7 @@ import CheckVerifyEmail from "./general-components/CheckVerifyEmail.jsx";
 import AuthCheckRoute from "./pages/Auth/AuthCheckRoute.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import MessagesPage from "./pages/MessagesPage.jsx";
 
 const Router = () => {
 
@@ -49,6 +50,7 @@ const Router = () => {
                             </AuthCheckRoute>
                         }
                     />
+                    <Route path={"/messages"} element={<MessagesPage />} />
                     <Route path={"*"} element={<NotFoundPage />} />
                 </Routes>
             </Container>

@@ -1,0 +1,14 @@
+.MessagesReceived .list-group-item{
+    display: flex;
+    align-items: center;
+}
+.MessagesReceived .list-group-item header{
+    display: flex;
+    align-items: center;
+    margin-right: 2em;
+}
+.MessagesReceived .list-group-item header img{
+    height: 100px;
+    margin-right: 1em;
+    border-radius: .25em;
+}
