@@ -1,7 +1,7 @@
 import React from 'react';
-import {Badge} from "react-bootstrap";
 import {useUserAuth} from "../context-providers/AuthProvider.jsx";
 import MessagesReceived from "../pages-components/MessagesPage/MessagesReceived/MessagesReceived.jsx";
+import MessagesSent from "../pages-components/MessagesPage/MessagesSent/MessagesSent.jsx";
 
 const MessagesPage = () => {
 
@@ -9,9 +9,13 @@ const MessagesPage = () => {
 
     return (
         <div className={"MessagesPage"}>
-            <h3><Badge>Messages page</Badge></h3>
+            <h3 className={"mb-3"}>
+                Messages page
+            </h3>
 
             <MessagesReceived user={user} />
+            <hr />
+            <MessagesSent user={user} />
         </div>
     );
 };

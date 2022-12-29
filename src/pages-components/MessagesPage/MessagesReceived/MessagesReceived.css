@@ -1,6 +1,11 @@
 .MessagesReceived .list-group-item{
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+.MessagesReceived .list-group-item .left{
+    display: flex;
+    align-items: center;
 }
 .MessagesReceived .list-group-item header{
     display: flex;
@@ -11,4 +16,7 @@
     height: 100px;
     margin-right: 1em;
     border-radius: .25em;
+}
+.MessagesReceived .list-group-item strong{
+    margin-left: .25em;
 }
