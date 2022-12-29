@@ -2,16 +2,20 @@ import {set,ref} from "firebase/database";
 import {realtimeDB} from "../../database/firebase-connect.js";
 import {getDate} from "../../functions/getDate.js";
 
-export const handleSendMessage = (sender, recipient, messageData, dbUserUid, findChatId = false) =>{
 
-    const chatId = `${sender.uid}-${recipient.uid}`;
-    const messageId = `${sender.uid}-${Date.now()}`;
-    const url = `/users/${dbUserUid}/chats/${findChatId ? findChatId : chatId}/${messageId}`;
+//отправка сообщения
+export const handleSendMessage = (sender,recipient,messageData,dbUserUid,dateTime,findChatId) =>{
+    //дата передется в функцию для того чтобы в обеих сообщениях она была одинаковая
+
+    const chatId = findChatId || `${sender.uid}-${recipient.uid}`;
+    const messageId = `${sender.uid}-${dateTime}`;
+    const url = `/users/${dbUserUid}/chats/${chatId}/${messageId}`;
 
     const messageObject = {
         id:messageId,
-        date:getDate(Date.now()),
-        dateNoRedact: Date.now(),
+        chatId:chatId,
+        date:getDate(dateTime),
+        dateNoRedact: dateTime,
         sender:{
             id:sender.uid,
             displayName:sender.displayName,

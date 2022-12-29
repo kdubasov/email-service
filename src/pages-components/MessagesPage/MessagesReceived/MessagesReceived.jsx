@@ -7,7 +7,7 @@ import MessagesReceivedItem from "./MessagesReceivedItem.jsx";
 const MessagesReceived = ({user}) => {
 
     const messagesReceived = useGetUserChats(user?.uid);
-    // console.log(messagesReceived,"MessagesPage messagesReceived");
+    console.log(messagesReceived,"MessagesPage messagesReceived");
 
     return (
         <div className={"MessagesReceived"}>

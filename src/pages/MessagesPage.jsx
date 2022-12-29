@@ -9,9 +9,7 @@ const MessagesPage = () => {
 
     return (
         <div className={"MessagesPage"}>
-            <h3 className={"mb-3"}>
-                Messages page
-            </h3>
+            <h3 className={"mb-3"}>Messages page</h3>
 
             <MessagesReceived user={user} />
             <hr />

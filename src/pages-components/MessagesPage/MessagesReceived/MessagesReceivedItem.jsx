@@ -1,7 +1,41 @@
 import React from 'react';
 import {Button, ListGroupItem} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {setAlert} from "../../../redux-store/slices/messageAlertSlice.js";
+import {handleHideMessage} from "../../../pages-functions/Chats/handleHideMessage.js";
 
 const MessagesReceivedItem = ({mess}) => {
+
+    const dispatch = useDispatch();
+
+    //delete message (all users)
+    const handleDelete = () => {
+        const url = `/users/${mess.recipient.id}/chats/${mess.chatId}/${mess.id}`;
+
+        handleHideMessage(url,mess)
+            .then(() => dispatch(setAlert({//alert show success
+                show:true,
+                variant:"success",
+                text:"Message deleted!",
+            })))
+            .catch(err => dispatch(setAlert({//alert show danger
+                show:true,
+                variant:"danger",
+                text:err,
+            })))
+
+        setTimeout(() => dispatch(setAlert({//alert hide
+            show:false,
+            variant:"",
+            text:"",
+        })),1000 * 10)
+    }
+
+    //если сообщение было удалено то не показываем его
+    if (mess.hide){
+        return false;
+    }
+
     return (
         <ListGroupItem key={mess.id}>
             <div className={"left"}>
@@ -38,6 +72,7 @@ const MessagesReceivedItem = ({mess}) => {
                     variant={"danger"}
                     size={"sm"}
                     className={"mb-1"}
+                    onClick={handleDelete}
                 >
                     Delete
                 </Button>

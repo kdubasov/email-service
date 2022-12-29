@@ -31,11 +31,12 @@ const SendMessage = () => {
     const dataRecipient = useGetUserFromEmail(formData.recipient);
 
     // console.log(formData);
-    console.log(dataRecipient,"dataRecipient");
+    // console.log(dataRecipient,"dataRecipient");
     // console.log(user);
 
     //проверяем есть ли уже созданный чат и если да то записываем в него, если нет то в новый
     const createdChat = useGetChatId(user?.uid,dataRecipient?.uid);
+    // console.log(createdChat);
 
     //send message
     const handleSend = (e) => {
@@ -51,10 +52,13 @@ const SendMessage = () => {
             return false;
         }
 
+        //дата передется в функцию для того чтобы в обеих сообщениях она была одинаковая
+        const dateTime = Date.now();
+
         //send message function
-        handleSendMessage(user,dataRecipient,formData,user.uid,createdChat)
+        handleSendMessage(user,dataRecipient,formData,user.uid,dateTime,createdChat)
             .then(
-                () => handleSendMessage(user,dataRecipient,formData,dataRecipient.uid,createdChat)
+                () => handleSendMessage(user,dataRecipient,formData,dataRecipient.uid,dateTime,createdChat)
                     .then(() => dispatch(setAlert({//alert show
                         show:true,
                         variant:"success",

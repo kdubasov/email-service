@@ -7,7 +7,7 @@ import {ListGroup} from "react-bootstrap";
 const MessagesSent = ({user}) => {
 
     const messagesSent = useGetUserSentMess(user?.uid);
-    console.log(messagesSent,"MessagesPage messagesSent");
+    // console.log(messagesSent,"MessagesPage messagesSent");
 
     return (
         <div className={"MessagesSent"}>
