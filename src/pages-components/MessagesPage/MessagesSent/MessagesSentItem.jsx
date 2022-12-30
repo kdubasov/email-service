@@ -5,7 +5,7 @@ import {setAlert} from "../../../redux-store/slices/messageAlertSlice.js";
 import {useDispatch} from "react-redux";
 
 const MessagesSentItem = ({mess}) => {
-    console.log(mess,"MessagesSentItem");
+    // console.log(mess,"MessagesSentItem");
 
     const dispatch = useDispatch();
 

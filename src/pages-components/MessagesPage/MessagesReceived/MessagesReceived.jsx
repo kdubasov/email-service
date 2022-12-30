@@ -7,7 +7,7 @@ import MessagesReceivedItem from "./MessagesReceivedItem.jsx";
 const MessagesReceived = ({user}) => {
 
     const messagesReceived = useGetUserChats(user?.uid);
-    console.log(messagesReceived,"MessagesPage messagesReceived");
+    // console.log(messagesReceived,"MessagesPage messagesReceived");
 
     return (
         <div className={"MessagesReceived"}>
@@ -24,7 +24,7 @@ const MessagesReceived = ({user}) => {
                     <p className={"m-0 opacity-50"}>
                         Входящих сообщений нет
                     </p>
-                }
+            }
         </div>
     );
 };

@@ -31,6 +31,8 @@ const Router = () => {
             <Container className={"py-3"}>
                 <Routes>
                     <Route path={"/"} element={<MainPage />} />
+
+                    {/*login and register*/}
                     <Route path={"/login"} element={<LoginPage />} />
                     <Route path={"/signIn"} element={<RegisterPage />} />
                     <Route path={"/resetPassword"} element={<ResetPasswordPage />} />
@@ -42,6 +44,8 @@ const Router = () => {
                             </AuthCheckRoute>
                         }
                     />
+
+                    {/*admin*/}
                     <Route
                         path={"/admin"}
                         element={
@@ -50,7 +54,11 @@ const Router = () => {
                             </AuthCheckRoute>
                         }
                     />
+
+                    {/*messages list*/}
                     <Route path={"/messages"} element={<MessagesPage />} />
+
+                    {/*404 page*/}
                     <Route path={"*"} element={<NotFoundPage />} />
                 </Routes>
             </Container>
