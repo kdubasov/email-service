@@ -13,11 +13,20 @@ import AuthCheckRoute from "./pages/Auth/AuthCheckRoute.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import MessagesPage from "./pages/MessagesPage.jsx";
+import SendMessageShow from "./general-components/SendMessage/SendMessageShow.jsx";
+import {useUserAuth} from "./context-providers/AuthProvider.jsx";
 
 const Router = () => {
 
+    const { user } = useUserAuth();
+
     return (
         <div>
+
+            {//send message block
+                (user && user.emailVerified) &&
+                <SendMessageShow />
+            }
 
             {/*verify email message*/}
             <CheckVerifyEmail />

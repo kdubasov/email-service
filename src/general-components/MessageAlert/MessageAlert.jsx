@@ -7,7 +7,7 @@ const MessageAlert = () => {
 
     //data from state about general alert
     const dataAlert = useSelector(state => state.messageAlert);
-    console.log(dataAlert)
+    console.log(dataAlert,"alert data");
 
     if (dataAlert['show']){
         return (

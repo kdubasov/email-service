@@ -3,6 +3,7 @@ import {Button, ListGroupItem} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {setAlert} from "../../../redux-store/slices/messageAlertSlice.js";
 import {handleHideMessage} from "../../../pages-functions/Chats/handleHideMessage.js";
+import {setMessage} from "../../../redux-store/slices/sendMessageSlice.js";
 
 const MessagesReceivedItem = ({mess}) => {
 
@@ -29,6 +30,14 @@ const MessagesReceivedItem = ({mess}) => {
             variant:"",
             text:"",
         })),1000 * 10)
+    }
+
+    //отвеитьь на сообщение
+    const handleReply = () => {
+        dispatch(setMessage({//alert show
+            show: true,
+            recipient: mess.sender.email,
+        }));
     }
 
     //если сообщение было удалено то не показываем его
@@ -79,6 +88,7 @@ const MessagesReceivedItem = ({mess}) => {
                 <br/>
 
                 <Button
+                    onClick={handleReply}
                     variant={"success"}
                     size={"sm"}
                 >

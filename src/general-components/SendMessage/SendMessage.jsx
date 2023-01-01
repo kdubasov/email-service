@@ -7,15 +7,19 @@ import {setAlert} from "../../redux-store/slices/messageAlertSlice.js";
 import {useDispatch} from "react-redux";
 import {handleSendMessage} from "../../pages-functions/SendMessage/handleSendMessage.js";
 import {useGetChatId} from "../../pages-functions/Chats/useGetChatId.js";
+import useTheme from "../../hooks/useTheme.js";
 
-const SendMessage = () => {
+const SendMessage = ({dataFormSend}) => {
 
     const { user } = useUserAuth();
     const dispatch = useDispatch();
 
+    //получаем тему из хука
+    const {type} = useTheme();
+
     //data from form
     const [formData,setFormData] = useState({
-        recipient:"",
+        recipient:dataFormSend.recipient,
         subject:"",
         text:"",
     })
@@ -81,7 +85,7 @@ const SendMessage = () => {
     }
 
     return (
-        <Form onSubmit={handleSend} className={"SendMessage"}>
+        <Form onSubmit={handleSend} className={`SendMessage ${type}`}>
             <div className={"input-container"}>
                 <label className={"small"}>Message recipient</label>
                 <FormControl
